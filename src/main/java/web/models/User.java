@@ -63,12 +63,6 @@ public class User {
         this.email = email;
     }
 
-    public void setValues(String name, String surname, String email) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-    }
-
     @Override
     public String toString() {
         return "User{" +

@@ -25,7 +25,7 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public void add(User user) {
-        entityManager.persist(new User(user.getName(), user.getSurname(), user.getEmail()));
+        entityManager.persist(user);
     }
 
     @Override
