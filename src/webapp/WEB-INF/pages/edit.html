@@ -8,7 +8,7 @@
 <body>
 <h1>Users List</h1>
 
-<form method="post" th:action="@{'/users/edit/' + ${id}}" th:object="${userInfo}">
+<form th:method="PATCH" th:action="@{'/users/edit/' + ${id}}" th:object="${userInfo}">
     <input id="firstName" placeholder="Enter First Name" required th:field="*{name}" type="text"/>
     <br/><br/>
     <input id="lastName" placeholder="Enter Last Name" required th:field="*{surname}" type="text"/>

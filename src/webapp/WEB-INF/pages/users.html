@@ -41,8 +41,12 @@
             <td th:utext="${user.getName()}">...</td>
             <td th:utext="${user.getSurname()}">...</td>
             <td th:utext="${user.getEmail()}">...</td>
-            <td><a th:href="'/users/delete/' + ${user.id}">delete</a></td>
-            <td><a th:href="'/users/edit/' + ${user.id}">edit</a></td>
+            <td><form th:method="DELETE" th:action="@{'/users/delete/' + ${user.id}}">
+                <button type="submit" name="submit" value="value" class="link-button">DELETE</button>
+            </form></td>
+            <td><form th:method="GET" th:action="@{'/users/edit/' + ${user.id}}">
+                <button type="submit" name="submit" value="value" class="link-button">EDIT</button>
+            </form></td>
         </tr>
     </table>
 

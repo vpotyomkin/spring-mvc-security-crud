@@ -9,32 +9,20 @@ import web.models.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 public class UserDAOImpl implements UserDAO{
-    //private SessionFactory sessionFactory;
-    private EntityManagerFactory entityManagerFactory;
-    @Autowired
-    public void setEmf(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
-    }
-    /*public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }*/
 
-    //public void setSessionFactory(SessionFactory sessionFactory) {
-    //    this.sessionFactory = sessionFactory;
-    //}
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
+
 
     @Override
     public List allUsers() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<User> results = entityManager
-                .createQuery("from User", User.class)
-                .getResultList();
-        //Session session = sessionFactory.getCurrentSession();
-        //return session.createQuery("from User").list();
+        List<User> results = entityManager.createQuery("from User", User.class).getResultList();
         entityManager.close();
         return results;
     }
