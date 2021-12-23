@@ -10,7 +10,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import web.models.User;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -19,6 +21,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = "java")
 @EnableTransactionManagement
 @PropertySource(value = "classpath:db.properties")
+@Component
 public class HibernateConfig {
     private Environment environment;
 
@@ -48,8 +51,9 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("java.filmography.model");
+        sessionFactory.setPackagesToScan("web");
         sessionFactory.setHibernateProperties(hibernateProperties());
+        sessionFactory.setAnnotatedClasses(User.class);
         return sessionFactory;
     }
 

@@ -1,13 +1,51 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <meta charset="UTF-8" />
+    <title>Users list</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<div th:each="user : ${users}">
-        <a th:text="${user.toString()}"></a>
+<h1>Users List</h1>
+
+<form method="post" th:action="@{/users}" th:object="${userInfo}">
+    <input id="firstName" placeholder="Enter First Name" required th:field="*{name}" type="text"/>
+    <br/><br/>
+    <input id="lastName" placeholder="Enter Last Name" required th:field="*{surname}" type="text"/>
+    <br/><br/>
+    <input id="email" placeholder="Enter Email" required th:field="*{email}" type="text"/>
+    <br/><br/>
+    <input type="submit" value="Create User">
+    <input type="reset" value="Reset">
+</form>
+
+<br/><br/>
+
+<div>
+    <table>
+        <tr>
+            <th>user id</th>
+            <th>first name</th>
+            <th>last name</th>
+            <th>email</th>
+            <th>actions</th>
+
+        </tr>
+
+        <tr th:if="${#lists.isEmpty(users)}">
+            <td colspan="7">No Records found. Add some...!</td>
+        </tr>
+
+        <tr th:each ="user : ${users}">
+            <td th:utext="${user.getId()}">...</td>
+            <td th:utext="${user.getName()}">...</td>
+            <td th:utext="${user.getSurname()}">...</td>
+            <td th:utext="${user.getEmail()}">...</td>
+            <td><a th:href="'/users/delete/' + ${user.id}">delete</a></td>
+            <td><a th:href="'/users/edit/' + ${user.id}">edit</a></td>
+        </tr>
+    </table>
+
 </div>
 </body>
 </html>
