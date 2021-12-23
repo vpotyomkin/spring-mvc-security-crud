@@ -21,8 +21,7 @@ public class User {
     @Column
     private String email;
 
-    public User(String id, String name, String surname, String email) {
-        this.id = id;
+    public User(String name, String surname, String email) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -61,6 +60,12 @@ public class User {
     }
 
     public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setValues(String name, String surname, String email) {
+        this.name = name;
+        this.surname = surname;
         this.email = email;
     }
 

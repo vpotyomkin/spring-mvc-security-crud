@@ -15,64 +15,32 @@ import java.util.List;
 @Repository
 public class UserDAOImpl implements UserDAO{
 
-    @Autowired
-    private EntityManagerFactory entityManagerFactory;
-
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
-    public List allUsers() {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<User> results = entityManager.createQuery("from User", User.class).getResultList();
-        entityManager.close();
-        return results;
+    public List<User> allUsers() {
+        return entityManager.createQuery("from User", User.class).getResultList();
     }
 
     @Override
     public void add(User user) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-        entityTransaction.begin();
-        User newUser = new User();
-        newUser.setName(user.getName());
-        newUser.setSurname(user.getSurname());
-        newUser.setEmail(user.getEmail());
-        entityManager.persist(newUser);
-        entityTransaction.commit();
-        entityManager.close();
+        entityManager.persist(new User(user.getName(), user.getSurname(), user.getEmail()));
     }
 
     @Override
     public void delete(Integer id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-        entityTransaction.begin();
-        User user = entityManager.find(User.class, String.valueOf(id));
-        entityManager.remove(user);
-        entityTransaction.commit();
-        entityManager.close();
+        entityManager.remove(getById(id));
 
     }
 
     @Override
     public User getById(Integer id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-        entityTransaction.begin();
-        User user = entityManager.find(User.class, String.valueOf(id));
-        entityManager.close();
-        return user;
+        return entityManager.find(User.class, String.valueOf(id));
     }
 
     @Override
     public void edit(User editedUser, Integer id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-        entityTransaction.begin();
-        User oldUser = entityManager.find(User.class, String.valueOf(id));
-        oldUser.setName(editedUser.getName());
-        oldUser.setSurname(editedUser.getSurname());
-        oldUser.setEmail(editedUser.getEmail());
-        entityTransaction.commit();
-        entityManager.close();
+        getById(id).setValues(editedUser.getName(), editedUser.getSurname(), editedUser.getEmail());
     }
 }
