@@ -31,7 +31,6 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public void delete(Integer id) {
         entityManager.remove(getById(id));
-
     }
 
     @Override
@@ -40,7 +39,7 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public void edit(User editedUser, Integer id) {
-        getById(id).setValues(editedUser.getName(), editedUser.getSurname(), editedUser.getEmail());
+    public void edit(User editedUser) {
+        entityManager.merge(editedUser);
     }
 }
