@@ -1,14 +1,9 @@
 package web.DAO;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import web.models.User;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -29,13 +24,13 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(long id) {
         entityManager.remove(getById(id));
     }
 
     @Override
-    public User getById(Integer id) {
-        return entityManager.find(User.class, String.valueOf(id));
+    public User getById(long id) {
+        return entityManager.find(User.class, id);
     }
 
     @Override

@@ -15,6 +15,8 @@
     <br/><br/>
     <input id="email" placeholder="Enter Email" required th:field="*{email}" type="text"/>
     <br/><br/>
+    <input id="role" placeholder="Enter role" th:field="*{roles}" type="text"/>
+    <br/><br/>
     <input type="submit" value="Create User">
     <input type="reset" value="Reset">
 </form>
@@ -28,6 +30,7 @@
             <th>first name</th>
             <th>last name</th>
             <th>email</th>
+            <th>roles</th>
             <th>actions</th>
 
         </tr>
@@ -41,6 +44,7 @@
             <td th:utext="${user.getName()}">...</td>
             <td th:utext="${user.getSurname()}">...</td>
             <td th:utext="${user.getEmail()}">...</td>
+            <td th:utext="${user.getRoles()}">...</td>
             <td><form th:method="DELETE" th:action="@{'/users/delete/' + ${user.id}}">
                 <button type="submit" name="submit" value="value" class="link-button">DELETE</button>
             </form></td>
