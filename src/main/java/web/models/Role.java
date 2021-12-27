@@ -2,7 +2,7 @@ package web.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "roles")
 @Data
 @NoArgsConstructor
-public class Role {
+public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
@@ -27,4 +27,8 @@ public class Role {
         return name;
     }
 
+    @Override
+    public String getAuthority() {
+        return name;
+    }
 }

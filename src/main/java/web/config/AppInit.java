@@ -3,6 +3,7 @@ package web.config;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import web.config.handler.LoginSuccessHandler;
 
 import javax.servlet.Filter;
 import javax.servlet.ServletContext;
@@ -13,7 +14,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     // Метод, указывающий на класс конфигурации
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{HibernateConfig.class};
+        return new Class[]{HibernateConfig.class, SecurityConfig.class};
     }
 
 

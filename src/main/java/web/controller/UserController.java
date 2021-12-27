@@ -4,13 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import web.Service.RoleService;
 import web.Service.UserService;
-import web.models.Role;
 import web.models.User;
-
-import java.util.List;
-import java.util.Set;
 
 @Controller
 public class UserController {

@@ -5,6 +5,7 @@ import web.models.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
@@ -30,6 +31,14 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public User getById(long id) {
+        return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public User getUserByName(String username) {
+        Query query = entityManager.createQuery("SELECT id FROM User WHERE name = :username");
+        query.setParameter("username", username);
+        Long id = (Long) query.getResultList().get(0);
         return entityManager.find(User.class, id);
     }
 
