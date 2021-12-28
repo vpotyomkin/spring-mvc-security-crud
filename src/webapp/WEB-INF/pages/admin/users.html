@@ -19,10 +19,10 @@
     <br/><br/>
     <div>
         <p>Choose roles:</p>
-        <select name="rolesSelected" multiple required size="6">
+        <select name="rolesSelected" multiple="multiple">>
             <option disabled selected>select role</option>
             <div th:each="role : ${allRoles}">
-                <option th:text="${role.getName()}" th:value="${role.getId()}" name="roles"/>
+                <option th:text="${role.getName()}" th:value="${role.getId()}" name="roles"></option>
             </div>
         </select>
 

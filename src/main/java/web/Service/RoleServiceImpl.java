@@ -24,21 +24,10 @@ public class RoleServiceImpl implements RoleService {
         return roleDAO.getAll();
     }
 
-    /*@Override
-    @Transactional
-    public void add(Role role) {
-        roleDAO.add(role);
-    }*/
-
     @Override
     public void delete(long id) {
         roleDAO.delete(id);
     }
-
-    /*@Override
-    public void edit(Role role) {
-        roleDAO.edit(role);
-    }*/
 
     @Override
     public Role getById(long id) {

@@ -20,20 +20,10 @@ public class RoleDAOImpl implements RoleDAO{
         return new HashSet<>(entityManager.createQuery("from Role", Role.class).getResultList());
     }
 
-    /*
-    public void add(Role role) {
-        entityManager.persist(role);
-    }*/
-
     @Override
     public void delete(long id) {
         entityManager.remove(getById(id));
     }
-
-    /*@Override
-    public void edit(Role roleEdited) {
-        entityManager.merge(roleEdited);
-    }*/
 
     @Override
     public Role getById(long id) {
