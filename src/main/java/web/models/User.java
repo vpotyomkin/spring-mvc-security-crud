@@ -1,10 +1,6 @@
 package web.models;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,9 +12,6 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @Data
-@Getter
-@Setter
-@NoArgsConstructor
 public class User implements UserDetails {
 
     @Id
@@ -37,13 +30,13 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(String username, String firstName, String lastName, String password, Set<Role> roleSet) {
+    /*public User(String username, String firstName, String lastName, String password, Set<Role> roleSet) {
         this.username=username;
         this.firstName=firstName;
         this.lastName=lastName;
         this.password=password;
         this.roles=roleSet;
-    }
+    }*/
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -13,7 +13,7 @@ import java.util.Set;
 @Service
 @Transactional
 public class RoleServiceImpl implements RoleService {
-    RoleDAO roleDAO;
+    private final RoleDAO roleDAO;
 
     public RoleServiceImpl(RoleDAO roleDAO) {
         this.roleDAO = roleDAO;

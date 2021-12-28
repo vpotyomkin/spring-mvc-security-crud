@@ -6,9 +6,7 @@ import web.models.Role;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Repository
 public class RoleDAOImpl implements RoleDAO{

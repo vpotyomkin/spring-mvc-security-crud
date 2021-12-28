@@ -10,7 +10,6 @@ import web.models.Role;
 import web.models.User;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -27,7 +26,7 @@ public class UserController {
         this.roleService = roleService;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping(value = "/login")
     public String loginPage() {
         return "redirect:/users";
     }
@@ -50,8 +49,8 @@ public class UserController {
         for (Long s : roles) {
             roleSet.add(roleService.getById(s));
         }
-        User newUser = new User(user.getUsername(), user.getFirstName(), user.getLastName(),user.getPassword(),roleSet);
-        userService.add(newUser);
+        user.setRoles(roleSet);
+        userService.add(user);
         return "redirect:/admin/users";
     }
 
@@ -61,8 +60,7 @@ public class UserController {
         return "redirect:/admin/users";}
 
     @GetMapping("/user")
-    public String login (@PathVariable("id") Long id, Model model){
-        model.addAttribute("user", userService.getById(id));
+    public String login (){
         return "/user";
     }
 
@@ -79,16 +77,13 @@ public class UserController {
         return "admin/edit";}
 
     @PatchMapping(path = "/admin/users/edit/{id}")
-    public String editUser(@ModelAttribute User user, @PathVariable("id") long id, @ModelAttribute("rolesSelected") Set<Long> roles) {
+    public String editUser(@ModelAttribute("userToEdit") User userToEdit, @PathVariable("id") long id, @ModelAttribute("rolesSelected") Set<Long> roles, Model model) {
+        model.addAttribute("userToEdit", userService.getById(id));
         Set<Role> roleSet = new HashSet<>();
         for (Long s : roles) {
             roleSet.add(roleService.getById(s));
         }
-        user.setUsername(user.getUsername());
-        user.setFirstName(user.getFirstName());
-        user.setLastName(user.getLastName());
-        user.setPassword(user.getPassword());
-        user.setRoles(roleSet);
-        userService.edit(user);
+        userToEdit.setRoles(roleSet);
+        userService.edit(userToEdit);
         return "redirect:/admin/users";}
 }
