@@ -30,14 +30,6 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    /*public User(String username, String firstName, String lastName, String password, Set<Role> roleSet) {
-        this.username=username;
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.password=password;
-        this.roles=roleSet;
-    }*/
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
