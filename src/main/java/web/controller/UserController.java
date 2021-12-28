@@ -50,11 +50,6 @@ public class UserController {
         for (Long s : roles) {
             roleSet.add(roleService.getById(s));
         }
-        /*newUser.setUsername(user.getUsername());
-        newUser.setFirstName(user.getFirstName());
-        newUser.setLastName(user.getLastName());
-        newUser.setPassword(user.getPassword());
-        newUser.setRoles(roleSet);*/
         User newUser = new User(user.getUsername(), user.getFirstName(), user.getLastName(),user.getPassword(),roleSet);
         userService.add(newUser);
         return "redirect:/admin/users";
