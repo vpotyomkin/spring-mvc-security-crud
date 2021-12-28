@@ -38,6 +38,7 @@
     <table>
         <tr>
             <th>ID</th>
+            <th>USERNAME</th>
             <th>FIRST NAME</th>
             <th>LAST NAME</th>
             <th>PASSWORD</th>
@@ -52,6 +53,7 @@
 
         <tr th:each ="user : ${users}">
             <td th:utext="${user.getId()}">...</td>
+            <td th:utext="${user.getUsername()}">...</td>
             <td th:utext="${user.getFirstName()}">...</td>
             <td th:utext="${user.getLastName()}">...</td>
             <td th:utext="${user.getPassword()}">...</td>
