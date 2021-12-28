@@ -1,38 +1,44 @@
 package web.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.DAO.RoleDAO;
 import web.models.Role;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
-public class RoleServiceImpl implements RoleService{
-    @Autowired
+@Transactional
+public class RoleServiceImpl implements RoleService {
     RoleDAO roleDAO;
 
-    @Override
-    public List<Role> allRoles() {
-        return roleDAO.allRoles();
+    public RoleServiceImpl(RoleDAO roleDAO) {
+        this.roleDAO = roleDAO;
     }
 
     @Override
+    public Set<Role> getAll() {
+        return roleDAO.getAll();
+    }
+
+    /*@Override
     @Transactional
     public void add(Role role) {
         roleDAO.add(role);
-    }
+    }*/
 
     @Override
     public void delete(long id) {
         roleDAO.delete(id);
     }
 
-    @Override
+    /*@Override
     public void edit(Role role) {
         roleDAO.edit(role);
-    }
+    }*/
 
     @Override
     public Role getById(long id) {

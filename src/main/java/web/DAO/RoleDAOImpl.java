@@ -5,7 +5,10 @@ import web.models.Role;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class RoleDAOImpl implements RoleDAO{
@@ -13,24 +16,24 @@ public class RoleDAOImpl implements RoleDAO{
     EntityManager entityManager;
 
     @Override
-    public List<Role> allRoles() {
-        return entityManager.createQuery("from Role", Role.class).getResultList();
+    public Set<Role> getAll() {
+        return new HashSet<>(entityManager.createQuery("from Role", Role.class).getResultList());
     }
 
-    @Override
+    /*
     public void add(Role role) {
-        entityManager.merge(role);
-    }
+        entityManager.persist(role);
+    }*/
 
     @Override
     public void delete(long id) {
         entityManager.remove(getById(id));
     }
 
-    @Override
+    /*@Override
     public void edit(Role roleEdited) {
         entityManager.merge(roleEdited);
-    }
+    }*/
 
     @Override
     public Role getById(long id) {

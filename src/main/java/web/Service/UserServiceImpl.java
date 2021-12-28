@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.DAO.UserDAO;
-import web.DAO.UserDAOImpl;
 import web.models.Role;
 import web.models.User;
 
@@ -21,14 +20,16 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserDetailsService, UserService {
 
+    private final UserDAO userDAO;
 
-    @Autowired
-    private final UserDAO userDAO = new UserDAOImpl();
+    public UserServiceImpl(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
     @Override
     @Transactional
-    public List<User> allUsers() {
-        return userDAO.allUsers();
+    public List<User> getAll() {
+        return userDAO.getAll();
     }
 
     @Override
@@ -57,15 +58,15 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     @Transactional
-    public User getUserByName(String username) {
-        return userDAO.getUserByName(username);
+    public User getByUsername(String username) {
+        return userDAO.getByUsername(username);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userDAO.getUserByName(s);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userDAO.getByUsername(username);
         if(user == null) {
-            throw new UsernameNotFoundException(String.format("User '%s' not found", s));
+            throw new UsernameNotFoundException(String.format("User '%s' not found", username));
         }
         return  new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
